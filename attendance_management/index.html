@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Management System</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: rgb(103, 50, 50);
+            background: linear-gradient(#000, rgb(102, 102, 200), #000);
+        }
+        .section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+            margin: 10px;
+        }
+        button, input {
+            padding: 10px;
+            margin: 10px;
+            width: calc(100% - 20px);
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="teacher-section" class="section">
+        <h1>Teacher Dashboard</h1>
+        <form method="POST">
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit" name="generate_code">Generate Code</button>
+        </form>
+        
+            <div id="code-display">
+            </div>
+            <p style="color:red;">
+        <button type="button" onclick="toggleAttendanceList()">Show/Hide Attendance List</button>
+        <ul id="attendance-list" style="display: none;">
+        </ul>
+        <form method="POST">
+            <button type="submit" name="save_data">Save Data to Database</button>
+        </form>
+            <p style="color:green;"></p>
+        <button type="button" onclick="toggleView('student')">Switch to Student View</button>
+    </div>
+
+    <div id="student-section" class="section" style="display: none;">
+        <h1>Student Attendance</h1>
+        <form method="POST">
+            <input type="text" name="code" placeholder="Attendance Code" required>
+            <button type="submit" name="check_code">Submit Code</button>
+        </form>
+            <div id="attendance-form">
+                <form method="POST">
+                    <input type="text" name="name" placeholder="Name" required>
+                    <input type="text" name="surname" placeholder="Surname" required>
+                    <button type="submit" name="submit_attendance">Submit Attendance</button>
+                </form>
+            </div>
+        <button type="button" onclick="toggleView('teacher')">Switch to Teacher View</button>
+    </div>
+
+    <script>
+        function toggleView(view) {
+            if (view === 'teacher') {
+                document.getElementById('teacher-section').style.display = 'block';
+                document.getElementById('student-section').style.display = 'none';
+            } else if (view === 'student') {
+                document.getElementById('teacher-section').style.display = 'none';
+                document.getElementById('student-section').style.display = 'block';
+            }
+        }
+        function toggleAttendanceList() {
+            var attendanceList = document.getElementById('attendance-list');
+            if (attendanceList.style.display === 'none') {
+                attendanceList.style.display = 'block';
+            } else {
+                attendanceList.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
